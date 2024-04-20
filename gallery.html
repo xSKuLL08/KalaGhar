@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="gallery.css">
+    <link rel="icon" type="Image/png" href="logo.png">
+    <title>Gallery</title>
+</head>
+
+<body>
+    <nav class="bg-white h-[12vh]">
+        <div class="h-20 flex items-center align-middle justify-between flex-row mr-32 ml-32">
+            <img class="h-12 w-12 rounded-lg " src="logo.png" alt="logo">
+            <div class="text-xl space-x-11 justify-end ">
+                <a class="hover:underline " href="index.html">Home</a>
+                <a class="hover:underline" href="">Gallery</a>
+                <button class="bg-yellow-500 hover:underline p-1 pl-2 pr-2 rounded-md text-white"><a
+                        href="login.html">Sign In</a></button>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        
+        <section class="products">
+            <br>
+            <h2 class="text-3xl font-bold mr-96">ART GALLERY</h2>
+            <div class="product category1">
+                <img class="" src="a10.jpg" alt="Product 1">
+                <h3>Product 1</h3>
+                <p>Oil Painting of a Thinking-Man </p>
+                <button class="hover:underline">Buy Now</button>
+            </div>
+            <div class="product category2">
+                <img src="a11.jpg" alt="Product 2">
+                <h3>Product 2</h3>
+                <p>folk abstract Art</p>
+                <button class="hover:underline">Buy Now</button>
+            </div>
+            <div class="product category1">
+                <img src="a12.jpg" alt="Product 3">
+                <h3>Product 3</h3>
+                <p>Canvas of Woods</p>
+                <button class="hover:underline">Buy Now</button>
+            </div>
+            <div class="product category2">
+                <img src="a13.jpg" alt="Product 4">
+                <h3>Product 4</h3>
+                <p>Painting of a Watcher</p>
+                <button class="hover:underline">Buy Now</button>
+            </div>
+            <div class="product category1">
+                <img src="a14.jpg" alt="Product 5">
+                <h3>Product 5</h3>
+                <p>Autumn Sunset</p>
+                <button class="hover:underline">Buy Now</button>
+            </div>
+            <div class="product category2">
+                <img src="a15.jpg" alt="Product 6">
+                <h3>Product 6</h3>
+                <p>A Man's painting a painting</p>
+                <button class="hover:underline">Buy Now</button>
+            </div>
+            <div class="product category1">
+                <img src="a16.jpg" alt="Product 7">
+                <h3>Product 7</h3>
+                <p>Country side night walk</p>
+                <button class="hover:underline">Buy Now</button>
+            </div>
+            <div class="product category2">
+                <img src="a17.jpg" alt="Product 8">
+                <h3>Product 8</h3>
+                <p>The Burning Ash</p>
+                <button class="hover:underline">Buy Now</button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-white rounded-lg shadow m-2 h-44">
+        <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
+            <div class="sm:flex sm:items-center sm:justify-between">
+                <a href="https://flowbite.com/" class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
+                    <img src="logo.png" class="h-8" alt="Flowbite Logo" />
+                    <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-black">KalaGhar</span>
+                </a>
+                <ul
+                    class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
+                    <li>
+                        <a href="#" class="hover:underline me-4 md:me-6">About Us</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:underline me-4 md:me-6">Privacy Policy</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:underline me-4 md:me-6">Licensing</a>
+                    </li>
+                </ul>
+            </div>
+            <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+            <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="#home"
+                    class="hover:underline">KalaGhar™</a>. All Rights Reserved.</span>
+        </div>
+    </footer>
+
+    <script>
+        const categoryFilter = document.getElementById('category-filter');
+        const products = document.querySelectorAll('.product');
+
+        categoryFilter.addEventListener('change', () => {
+            const selectedCategory = categoryFilter.value;
+
+            products.forEach(product => {
+                if (selectedCategory === 'all' || product.classList.contains(selectedCategory)) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        });
+    </script>
+    
+    <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
+    <script src="https://mediafiles.botpress.cloud/7623e1f9-32ac-4624-a936-95ba7e6e2b88/webchat/config.js"
+        defer></script>
+
+</body>
+</html>

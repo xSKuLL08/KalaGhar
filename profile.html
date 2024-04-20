@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+        <link rel="icon" type="icon/jpg" href="logo.png">
+    <title>Profile</title>
+    <script src="index.js"></script>
+</head>
+
+<body>
+    <nav class="bg-white h-[12vh]">
+        <div class="h-20 flex items-center align-middle justify-between flex-row mr-32 ml-32">
+            <img class="h-12 w-12 rounded-lg " src="logo.png" alt="logo">
+            <div class="text-xl space-x-11 justify-end ">
+                <a class="hover:underline " href="index.html">Home</a>
+                <a class="hover:underline" href="">Gallery</a>
+                <button class="bg-yellow-500 hover:underline p-1 pl-2 pr-2 rounded-md text-white"><a
+                        href="login.html">Sign In</a></button>
+            </div>
+        </div>
+    </nav>
+    <div class="flex flex-row justify-between">
+        <div class="w-1/4 mt-20 ml-20 content-center">
+            <div class=" relative">
+                <img class="w-[80%] " src="logo.png" alt="User Photo" class="profile-photo">
+            </div>
+            <center>
+                <div id="ucard" class="art-container">
+                    <span id="userMail" class="text-3xl">Aarnav Anand</span>
+                </div>
+                <div class="imageUpload">
+                    <input type="file"
+                        class="inp border-3 hover:bg-gray-400 text-white my-2 py-2 px-1 pl-7 rounded-md font-bold bg-[rgb(255,157,0)]"
+                        onchange="getImageData(event)" />
+                    <!-- <button onclick="selectImage()"
+                        class="selectImage border-3 hover:bg-gray-400 text-white my-2 py-2 px-5 rounded-md font-bold bg-[rgb(255,157,0)]">Select
+                        Images</button> -->
+                    <span class="filedata"></span>
+                    <div class="progressBar">
+                        <div class="progress"></div>
+                    </div>
+                    <button onclick="uploadImage()"
+                        class="upload border-3 hover:bg-gray-400 text-white my-2 py-2 px-5 rounded-md font-bold bg-[rgb(255,157,0)]">Upload</button>
+                    <!-- <span class="loading">Loading...</span> -->
+                    <!-- <img class="img" /> -->
+                </div>
+
+            </center>
+        </div>
+        <div class="grid grid-cols-3 grid-row-3 gap-4 ml-10 mt-10">
+            <div>
+                <img class="rounded-md" src="a4.jpg" alt="hello">
+            </div>
+            <div>
+                <img class="rounded-md" src="a10.jpg" alt="hello">
+            </div>
+            <div>
+                <img class="rounded-md" src="a11.jpg" alt="hello">
+            </div>
+
+
+
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-storage.js"></script>
+    <script type="module" defer>
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyC-FAnPIXkO6JwWbStQ3duzR9K2pp_juqo",
+            authDomain: "whitespace-54790.firebaseapp.com",
+            projectId: "whitespace-54790",
+            storageBucket: "whitespace-54790.appspot.com",
+            messagingSenderId: "899710627074",
+            appId: "1:899710627074:web:9f284b5774733362e3e61b"
+        };
+
+        const app = firebase.initializeApp(firebaseConfig);
+
+        const storage = firebase.storage();
+
+        const inp = document.querySelector(".inp");
+        const progressbar = document.querySelector(".progress");
+        const img = document.querySelector(".img");
+        const fileData = document.querySelector(".filedata");
+        const loading = document.querySelector(".loading");
+        let file;
+        let fileName;
+        let progress;
+        let isLoading = false;
+        let uploadedFileName;
+        const selectImage = () => {
+            inp.click();
+        };
+        const getImageData = (e) => {
+            file = e.target.files[0];
+            fileName = Math.round(Math.random() * 9999) + file.name;
+            if (fileName) {
+                fileData.style.display = "block";
+            }
+            fileData.innerHTML = fileName;
+            console.log(file, fileName);
+        };
+
+        const uploadImage = () => {
+            // loading.style.display = "block";
+            const storageRef = storage.ref().child("myimages");
+            const folderRef = storageRef.child(fileName);
+            const uploadtask = folderRef.put(file);
+            uploadtask.on(
+                "state_changed",
+                (snapshot) => {
+                    console.log("Snapshot", snapshot.ref.name);
+                    progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    progress = Math.round(progress);
+                    progressbar.style.width = progress + "%";
+                    progressbar.innerHTML = progress + "%";
+                    uploadedFileName = snapshot.ref.name;
+                },
+                (error) => {
+                    console.log(error);
+                },
+                () => {
+                    storage
+                        .ref("myimages")
+                        .child(uploadedFileName)
+                        .getDownloadURL()
+                        .then((url) => {
+                            console.log("URL", url);
+                            if (!url) {
+                                img.style.display = "none";
+                            } else {
+                                img.style.display = "block";
+                                loading.style.display = "none";
+                            }
+                            img.setAttribute("src", url);
+                        });
+                    console.log("File Uploaded Successfully");
+                }
+            );
+        };
+    </script>
+</body>
+
+</html>

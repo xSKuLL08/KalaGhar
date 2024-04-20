@@ -1,0 +1,21 @@
+{
+  "name": "gfg-hackathon1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "vite"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.3",
+    "vite": "^5.2.9"
+  },
+  "dependencies": {
+    "firebase-admin": "^12.1.0",
+    "tailwind-scrollbar-hide": "^1.1.7"
+  }
+}
